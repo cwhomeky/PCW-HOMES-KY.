@@ -31,7 +31,6 @@
             border-radius: 9999px; 
             border: 2px solid rgba(212, 175, 55, 0.5); 
             box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.5); 
-            transition: transform 0.05s ease-out;
         }
     </style>
 </head>
@@ -73,39 +72,14 @@
         </div>
     </section>
 
-    <!-- ABOUT SECTION WITH PHOTO SHOWCASE & SLIDERS -->
+    <!-- ABOUT SECTION WITH LOCKED HEADSHOT SHOWCASE -->
     <section id="about" class="py-16 px-6 max-w-7xl mx-auto w-full">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
             
-            <!-- Headshot Display + Positioning Controls -->
+            <!-- Fixed Headshot Display -->
             <div class="md:col-span-5 flex flex-col items-center">
                 <div class="relative w-64 h-64 flex items-center justify-center overflow-hidden mb-4">
-                    <img id="main-agent-photo" src="https://via.placeholder.com/300x300?text=Upload+Headshot" class="w-full h-full headshot-smooth" alt="Patrick C. Washington">
-                </div>
-                
-                <!-- Live Photo Scale & Position Controls -->
-                <div class="glass-card p-4 rounded-xl w-full space-y-3 text-xs">
-                    <div class="flex justify-between items-center border-b border-slate-700 pb-2">
-                        <span class="font-bold text-amber-400 uppercase">Photo Scale & Alignment</span>
-                        <input type="file" id="main-photo-upload" accept="image/*" class="text-[10px] text-slate-400 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:bg-amber-500 file:text-slate-950 font-semibold">
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-slate-300 mb-1">
-                            <span>Zoom Scale:</span>
-                            <span id="main-scale-val" class="text-amber-400 font-bold">100%</span>
-                        </div>
-                        <input type="range" id="main-photo-scale" min="10" max="300" value="100" class="w-full accent-amber-400">
-                    </div>
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <span class="text-slate-300">Shift X (Left/Right):</span>
-                            <input type="range" id="main-photo-x" min="-150" max="150" value="0" class="w-full accent-amber-400">
-                        </div>
-                        <div>
-                            <span class="text-slate-300">Shift Y (Up/Down):</span>
-                            <input type="range" id="main-photo-y" min="-150" max="150" value="0" class="w-full accent-amber-400">
-                        </div>
-                    </div>
+                    <img id="main-agent-photo" src="https://via.placeholder.com/300x300?text=Patrick+C.+Washington" class="w-full h-full headshot-smooth" alt="Patrick C. Washington">
                 </div>
             </div>
 
@@ -219,38 +193,5 @@
         <p class="mt-4 text-[10px] text-slate-600">&copy; All Rights Reserved.</p>
     </footer>
 
-    <!-- SCRIPT FOR PHOTO SCALE & POSITION CONTROL -->
-    <script>
-        const mainPhoto = document.getElementById('main-agent-photo');
-        let mainScale = 100, mainX = 0, mainY = 0;
-
-        function updateMainPhoto() {
-            mainPhoto.style.transform = `translate(${mainX}px, ${mainY}px) scale(${mainScale / 100})`;
-            document.getElementById('main-scale-val').innerText = mainScale + '%';
-        }
-
-        document.getElementById('main-photo-scale').addEventListener('input', (e) => { 
-            mainScale = e.target.value; 
-            updateMainPhoto(); 
-        });
-        document.getElementById('main-photo-x').addEventListener('input', (e) => { 
-            mainX = e.target.value; 
-            updateMainPhoto(); 
-        });
-        document.getElementById('main-photo-y').addEventListener('input', (e) => { 
-            mainY = e.target.value; 
-            updateMainPhoto(); 
-        });
-
-        document.getElementById('main-photo-upload').addEventListener('change', function(e) {
-            if (e.target.files[0]) {
-                const reader = new FileReader();
-                reader.onload = (ev) => {
-                    mainPhoto.src = ev.target.result;
-                };
-                reader.readAsDataURL(e.target.files[0]);
-            }
-        });
-    </script>
 </body>
 </html>
