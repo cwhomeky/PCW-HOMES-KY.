@@ -72,14 +72,18 @@
         </div>
     </section>
 
-    <!-- ABOUT SECTION WITH PHOTO SHOWCASE -->
+    <!-- ABOUT SECTION WITH CIRCLE HEADSHOT SHOWCASE -->
     <section id="about" class="py-16 px-6 max-w-7xl mx-auto w-full">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
             
-            <!-- Headshot Display -->
+            <!-- Headshot Display in Gold Circle -->
             <div class="md:col-span-5 flex flex-col items-center">
-                <div class="relative w-64 h-64 flex items-center justify-center overflow-hidden mb-4">
-                    <img id="main-agent-photo" src="headshot no background.jpg" class="w-full h-full headshot-smooth" alt="Patrick C. Washington">
+                <div class="relative w-64 h-64 flex items-center justify-center overflow-hidden mb-4 bg-slate-900/50 rounded-full">
+                    <img id="main-agent-photo" 
+                         src="headshot.jpg" 
+                         onerror="tryNextPhotoSource(this)" 
+                         class="w-full h-full headshot-smooth" 
+                         alt="Patrick C. Washington">
                 </div>
             </div>
 
@@ -192,6 +196,26 @@
         <p class="mt-1">Direct: (502) 230-8636 | (216) 336-5533 | cwhomeky@gmail.com</p>
         <p class="mt-4 text-[10px] text-slate-600">&copy; All Rights Reserved.</p>
     </footer>
+
+    <!-- AUTOMATIC PHOTO FALLBACK ENGINE -->
+    <script>
+        const photoSources = [
+            'headshot.jpg',
+            'headshot.png',
+            'headshot no background.jpg',
+            'headshot.jpeg',
+            'headshot.PNG',
+            'https://via.placeholder.com/300x300?text=Patrick+C.+Washington'
+        ];
+        let photoIndex = 0;
+
+        function tryNextPhotoSource(imgElement) {
+            photoIndex++;
+            if (photoIndex < photoSources.length) {
+                imgElement.src = photoSources[photoIndex];
+            }
+        }
+    </script>
 
 </body>
 </html>
